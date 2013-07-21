@@ -1,7 +1,6 @@
-import os,urllib2,xbmcplugin,xbmcgui
-#from cgi import parse_qs
-from BeautifulSoup import BeautifulStoneSoup as Soup
-#, BeautifulStoneSoup
+import os,sys,urllib2
+import xbmcplugin,xbmcgui
+import xml.etree.ElementTree as ET
 
 __addon__ = "SomaFM"
 __addonid__ = "plugin.audio.somafm"
@@ -37,13 +36,13 @@ def getHTMLFor(url, withData=None, withReferrer=None):
   
   
 def addEntries():
-    somaHTML = getHTMLFor(url="channels.xml")
-    channelsContainer = Soup(somaHTML).find("channels")
+    somaXML = getHTMLFor(url="channels.xml")
+    channelsContainer = ET.fromstring(somaXML)
 
-    for stations in channelsContainer.findAll("channel"):
-        title = stations.title.string
-        img = rootURL + stations.image.string
-        url = rootURL + stations.fastpls[0]
+    for stations in channelsContainer.findall(".//channel"):
+        title = stations.find('title').text
+        img = rootURL + stations.find('image').text.replace(rootURL,"")
+        url = rootURL + stations.find('fastpls').text
         log(title)
         log(img)
         log(url)
@@ -55,11 +54,5 @@ def addEntries():
             listitem=li)
 
 
-addEntries()            
+addEntries()
 xbmcplugin.endOfDirectory(handle)
-
-#li = xbmcgui.ListItem("GrooveSalad")
-#li.setProperty('IsPlayable', 'true')
-
-
-
