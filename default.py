@@ -13,7 +13,7 @@ def log(msg):
 log("Initialized!")
 log(sys.argv)
 
-rootURL = "http://somafm.com"
+rootURL = "http://somafm.com/"
 
 #pluginPath = sys.argv[0]
 handle = int(sys.argv[1])
@@ -27,6 +27,7 @@ def getHeaders(withReferrer=None):
   return headers
 
 def getHTMLFor(url, withData=None, withReferrer=None):
+  url = rootURL + url
   log("Get HTML for URL: " + url)
   req = urllib2.Request(url, withData, getHeaders(withReferrer))
   response = urllib2.urlopen(req)
@@ -36,14 +37,13 @@ def getHTMLFor(url, withData=None, withReferrer=None):
   
   
 def addEntries():
-    somaHTML = getHTMLFor(url=rootURL)
-    stationsDiv = Soup(somaHTML).find("div", id="stations")
+    somaHTML = getHTMLFor(url="channels.xml")
+    channelsContainer = Soup(somaHTML).find("channels")
 
-    for stations in stationsDiv.findAll("li"):
-        #log(stations.prettify())
-        title = stations.h3.string
-        img = rootURL + stations.img["src"]
-        url = rootURL + stations.a["href"].replace("/play","") + ".pls"
+    for stations in channelsContainer.findAll("channel"):
+        title = stations.title.string
+        img = rootURL + stations.image.string
+        url = rootURL + stations.fastpls[0]
         log(title)
         log(img)
         log(url)
