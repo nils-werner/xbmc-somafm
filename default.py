@@ -42,7 +42,7 @@ def addEntries():
     for stations in channelsContainer.findall(".//channel"):
         title = stations.find('title').text
         img = rootURL + stations.find('image').text.replace(rootURL,"")
-        url = rootURL + stations.find('fastpls').text
+        url = rootURL + stations.find('fastpls').text.replace(rootURL,"")
         log(title)
         log(img)
         log(url)
