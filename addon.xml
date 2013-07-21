@@ -8,7 +8,7 @@
         <import addon="script.module.beautifulsoup" version="3.0.8"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>executable</provides>
+        <provides>audio</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
         <platform>all</platform>
