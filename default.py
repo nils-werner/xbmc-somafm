@@ -5,7 +5,7 @@ from BeautifulSoup import BeautifulStoneSoup as Soup
 
 __addon__ = "SomaFM"
 __addonid__ = "plugin.audio.somafm"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 def log(msg):
   print "[PLUGIN] '%s (%s)' " % (__addon__, __version__) + str(msg)

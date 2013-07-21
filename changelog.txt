@@ -1,3 +1,9 @@
+[B]Version 0.0.2 - 2013-07-21[/B]
+
+- Use SomaFM XML API.
+
+
+
 [B]Version 0.0.1 - 2011-03-07[/B]
 
 - Initial version.
