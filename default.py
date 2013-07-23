@@ -40,12 +40,14 @@ def addEntries():
 
     for stations in channelsContainer.findall(".//channel"):
         title = stations.find('title').text
+        description = stations.find('description').text
         img = rootURL + stations.find('image').text.replace(rootURL,"")
         url = rootURL + stations.find('fastpls').text.replace(rootURL,"")
         log(title)
+        log(description)
         log(img)
         log(url)
-        li = xbmcgui.ListItem(title, thumbnailImage=img)
+        li = xbmcgui.ListItem(title, description, thumbnailImage=img)
         li.setProperty("IsPlayable","true")
         xbmcplugin.addDirectoryItem(
             handle=handle,
